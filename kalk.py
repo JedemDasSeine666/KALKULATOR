@@ -1,33 +1,49 @@
-import sys
 import logging
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
-print('Podaj działanie, posługując się odpowiednią liczbą: 1 Dodawanie, 2 Odejmowanie, 3 Mnożenie, 4 Dzielenie:')
+logger = logging.getLogger(__name__)
+
+op = input("Podaj operacje: 1: +, 2: -,3: *,4: /")
+a = int(input("a: "))
+b = int(input("b: "))
+def kalkulator_v1():
+    op = input("Podaj operacje: 1: +, 2: -,3: *,4: /")
+    a = int(input("a: "))
+    b = int(input("b: "))
 
 
-   
-def calc():
-    x = float(input('pierwsza liczba:'))
-    y = float(input('druga liczba:'))
-    do = float(input('rodzaj działania:')) 
-    if do == 1 :
-        logging.debug(f"Dodajemy {x} i {y}")
-        print('Wynik:')
-        print(x + y)
-    
-    elif do == 2 :
-        logging.debug(f"Odejmujemy {x} i {y}")
-        print('Wynik:')
-        print(x - y)
-    elif do == 3 :
-        logging.debug(f"Mnożymy {x} i {y}")
-        print('Wynik:')
-        print(x * y)     
-    elif do == 4 :
-        logging.debug(f"Dzielimy {x} i {y}")
-        print('Wynik:')
-        print(x / y)
-calc()        
-           
-    
-   
 
+def add(a, b): 
+    logger.info(f"Wywołano sumę: a:{a} b:{b}")
+    return a + b
+
+
+def sub(a, b): 
+    logger.info(f"Wywołano różnicę: a:{a} b:{b}")
+    return a - b
+
+def mul(a, b):
+    logger.info(f"Wywołano iloczyn: a:{a} b:{b}")
+    return a * b
+
+def div(a, b): 
+    logger.info(f"Wywołano iloraz: a:{a} b:{b}")
+    return a / b     
+
+def get_data():
+    op = input(f"Podaj operacje: 1: +, 2: -,3: *, 4: :")
+    a = int(input("a: "))
+    b = int(input("b: "))
+    return op, a, b
+
+operations = {
+    "1": add,
+    "2": sub,
+    "3": mul,
+    "4": div
+}
+print(operations["1"](1,2))
+
+
+
+def main():
+    op, a, b = get_data()
+    result = operations[op](a, b)
